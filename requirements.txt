@@ -1,0 +1,5 @@
+gTTS
+pygame
+google-cloud-speech
+pyaudio
+pynput

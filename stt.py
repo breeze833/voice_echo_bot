@@ -1,4 +1,4 @@
-# -*- encoding utf-8 -*-
+# -*- encoding: utf-8 -*-
 import pyaudio
 from pynput.keyboard import Listener
 import sys
@@ -31,7 +31,7 @@ def _init_stt_context():
 
 init, stop, get_recording_stream = _init_stt_context()
 
-def wait_anykey():
+def _wait_anykey():
     listener = None
     def any_keypress(key):
         nonlocal listener
@@ -40,7 +40,7 @@ def wait_anykey():
     with listener:
         listener.join()
 
-def get_anykey_detector():
+def _get_anykey_detector():
     is_detected = False
     listener = None
     def any_keypress(key):
@@ -61,10 +61,10 @@ def get_anykey_detector():
 def record_voice():
     print('Ready to record your voice, any key to start...', end='')
     sys.stdout.flush()
-    wait_anykey()
+    _wait_anykey()
     print('\nStart recording, any key to stop...', end='')
     sys.stdout.flush()
-    anykey_detected = get_anykey_detector()
+    anykey_detected = _get_anykey_detector()
     stream = get_recording_stream()
     frames = []
     while not anykey_detected():
@@ -76,7 +76,7 @@ def record_voice():
 
     return b''.join(frames)
 
-def get_credentials_file():
+def _get_credentials_file():
     file_env = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
     file_cur = 'google-stt.json'
     file_home = os.path.join(os.path.expanduser('~'),'google-stt.json')
@@ -96,9 +96,9 @@ def google_stt(voice_data, lang='zh-tw'):
         sample_rate_hertz = RATE,
         language_code = lang
     )
-    credentials_file = get_credentials_file()
+    credentials_file = _get_credentials_file()
     assert credentials_file!=None, 'Need a credentials file'
-    credentials = service_account.Credentials.from_service_account_file(get_credentials_file())
+    credentials = service_account.Credentials.from_service_account_file(credentials_file)
     client = speech.SpeechClient(credentials=credentials)
     response = client.recognize(config=config, audio=audio)
     if len(response.results)==0:

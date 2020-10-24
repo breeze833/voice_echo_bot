@@ -16,6 +16,21 @@ pyaudio_conf = {
     'input': True
 }
 
+def _init_stt_context():
+    p = None
+    def stt_init():
+        nonlocal p 
+        p = pyaudio.PyAudio()
+    def stt_stop():
+        nonlocal p
+        p.terminate()
+    def recording_stream():
+        nonlocal p
+        return p.open(**pyaudio_conf)
+    return (stt_init, stt_stop, recording_stream)
+
+init, stop, get_recording_stream = _init_stt_context()
+
 def wait_anykey():
     listener = None
     def any_keypress(key):
@@ -44,15 +59,13 @@ def get_anykey_detector():
     return anykey_detected
 
 def record_voice():
-    p = pyaudio.PyAudio()
-
     print('Ready to record your voice, any key to start...', end='')
     sys.stdout.flush()
     wait_anykey()
     print('\nStart recording, any key to stop...', end='')
     sys.stdout.flush()
     anykey_detected = get_anykey_detector()
-    stream = p.open(**pyaudio_conf)
+    stream = get_recording_stream()
     frames = []
     while not anykey_detected():
         data = stream.read(CHUNK_SIZE)
@@ -61,7 +74,6 @@ def record_voice():
     stream.close()
     print('\nRecording stopped.')
 
-    p.terminate()
     return b''.join(frames)
 
 def get_credentials_file():

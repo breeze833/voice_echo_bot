@@ -13,10 +13,13 @@ def say(text, lang='zh-tw'):
     if text==None or text.strip()=='': return
     gtts_obj = gTTS(text, lang=lang)
     voice_mp3 = BytesIO()
-    gtts_obj.write_to_fp(voice_mp3)
-    voice_mp3.seek(0)
+    try:
+        gtts_obj.write_to_fp(voice_mp3)
+        voice_mp3.seek(0)
 
-    pygame.mixer.music.load(voice_mp3)
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pass
+        pygame.mixer.music.load(voice_mp3)
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            pass
+    except Exception as e:
+        print(e)

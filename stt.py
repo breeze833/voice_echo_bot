@@ -32,25 +32,19 @@ def _init_stt_context():
 init, stop, get_recording_stream = _init_stt_context()
 
 def _wait_anykey():
-    listener = None
     def any_keypress(key):
-        nonlocal listener
-        listener.stop()
-    listener = Listener(on_press=any_keypress, suppress=True)
-    with listener:
+        return False
+    with Listener(on_press=any_keypress, suppress=True) as listener:
         listener.join()
 
 def _get_anykey_detector():
     is_detected = False
-    listener = None
-    def any_keypress(key):
+    def on_any_keypress(key):
         nonlocal is_detected
-        nonlocal listener
         is_detected = True
-        listener.stop()
+        return False
     def start_listener():
-        nonlocal listener
-        listener = Listener(on_press=any_keypress, suppress=True)
+        listener = Listener(on_press=on_any_keypress, suppress=True)
         listener.start()
     def anykey_detected():
         nonlocal is_detected

@@ -7,7 +7,7 @@ In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, and `google-cloud-speech
 ## Installation
 
 * Download the project
-* Makesure you have python3
+* Make sure you have python3
 * `pip install -r < requirements.txt`
 
 Note: you may need to install some native libraries manually.

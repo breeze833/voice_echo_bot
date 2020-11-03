@@ -62,3 +62,10 @@ optional arguments:
   -l LANG, --lang LANG  The language you use
 
 ```
+
+## Using the Cloud Text-to-Speech API
+
+The TTS based on the Google Cloud Platform API is implemented in `stt_gcp.py`.
+The corresponding comman-line programs are `tts_gcp.py` and `echo_bot_gcp.py`.
+To use the API, you need the credentials file. The default name is `google-tts.json`.
+

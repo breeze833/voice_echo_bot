@@ -1,3 +1,4 @@
 .tool-versions
 __pycache__
 google-stt.json
+google-tts.json

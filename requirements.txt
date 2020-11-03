@@ -3,3 +3,4 @@ pygame
 google-cloud-speech
 pyaudio
 pynput
+google-cloud-texttospeech

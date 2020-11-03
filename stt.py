@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 import pyaudio
 from pynput.keyboard import Listener
-import sys
 import os
+import sys
 from google.cloud import speech
 from google.oauth2 import service_account
 
@@ -88,7 +88,8 @@ def google_stt(voice_data, lang='zh-tw'):
     config = speech.RecognitionConfig(
         encoding = speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz = RATE,
-        language_code = lang
+        language_code = lang,
+        enable_automatic_punctuation = True
     )
     credentials_file = _get_credentials_file()
     assert credentials_file!=None, 'Need a credentials file'

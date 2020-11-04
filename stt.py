@@ -1,10 +1,9 @@
 # -*- encoding: utf-8 -*-
 import pyaudio
 from pynput.keyboard import Listener
-import os
 import sys
 from google.cloud import speech
-from google.oauth2 import service_account
+from gcp_utils import get_credentials
 
 CHUNK_SIZE = 1024
 RATE = 16000
@@ -70,19 +69,6 @@ def record_voice():
 
     return b''.join(frames)
 
-def _get_credentials_file():
-    file_env = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    file_cur = 'google-stt.json'
-    file_home = os.path.join(os.path.expanduser('~'),'google-stt.json')
-    if file_env!=None and os.path.exists(file_env):
-        return file_env
-    elif os.path.exists(file_cur):
-        return file_cur
-    elif os.path.exists(file_home):
-        return file_home
-    else:
-        return None
-
 def google_stt(voice_data, lang='zh-tw'):
     audio = speech.RecognitionAudio(content=voice_data)
     config = speech.RecognitionConfig(
@@ -91,10 +77,7 @@ def google_stt(voice_data, lang='zh-tw'):
         language_code = lang,
         enable_automatic_punctuation = True
     )
-    credentials_file = _get_credentials_file()
-    assert credentials_file!=None, 'Need a credentials file'
-    credentials = service_account.Credentials.from_service_account_file(credentials_file)
-    client = speech.SpeechClient(credentials=credentials)
+    client = speech.SpeechClient(credentials=get_credentials('google-stt.json'))
     response = client.recognize(config=config, audio=audio)
     if len(response.results)==0:
         return ''

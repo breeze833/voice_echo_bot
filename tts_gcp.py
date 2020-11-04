@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 from google.cloud import texttospeech
-from google.oauth2 import service_account
 from io import BytesIO
-import os
 import pygame
+from gcp_utils import get_credentials
 
 def init():
     pygame.mixer.init()
@@ -11,25 +10,9 @@ def init():
 def stop():
     pygame.mixer.quit()
 
-def _get_credentials_file():
-    file_env = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    file_cur = 'google-tts.json'
-    file_home = os.path.join(os.path.expanduser('~'),'google-tts.json')
-    if file_env!=None and os.path.exists(file_env):
-        return file_env
-    elif os.path.exists(file_cur):
-        return file_cur
-    elif os.path.exists(file_home):
-        return file_home
-    else:
-        return None
-
 def say(text, lang='zh-tw'):
     if text==None or text.strip()=='': return
-    credentials_file = _get_credentials_file()
-    assert credentials_file!=None, 'Need a credentials file'
-    credentials = service_account.Credentials.from_service_account_file(credentials_file)
-    client = texttospeech.TextToSpeechClient(credentials=credentials)
+    client = texttospeech.TextToSpeechClient(credentials=get_credentials('google-tts.json'))
     synthesis_input = texttospeech.SynthesisInput(text=text)
     voice = texttospeech.VoiceSelectionParams(
         language_code=lang, ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL

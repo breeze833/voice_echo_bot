@@ -9,6 +9,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Echo what you said')
     parser.add_argument('-l', '--lang', required=False, default='zh-tw', help='The language you use')
     args = parser.parse_args()
+    quit_terms = ['不玩了.', '不玩了。', 'Stop.', 'Stop。']
 
     stt.init()
     tts.init()
@@ -20,7 +21,7 @@ if __name__=='__main__':
         print('Transcript {}'.format(text))
         time.sleep(2)
         tts.say(text, lang=args.lang)
-        if text=='不玩了' or text=='stop':
+        if text in quit_terms:
             is_echoing = False
 
     stt.stop()

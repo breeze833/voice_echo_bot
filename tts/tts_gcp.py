@@ -2,7 +2,7 @@
 from google.cloud import texttospeech
 from io import BytesIO
 import pygame
-from gcp_utils import get_credentials
+from utils.gcp_utils import get_credentials
 
 def init():
     pygame.mixer.init()

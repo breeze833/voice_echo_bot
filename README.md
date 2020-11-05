@@ -2,7 +2,7 @@
 
 This is a simple bot for demonstrating how to integrate speech-to-text and text-to-speech packages.
 It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation for synthesizing the voice, and plays the voice.
-In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, and `google-cloud-speech` are used. 
+In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used. 
 
 ## Installation
 
@@ -21,7 +21,11 @@ Note: you may need to install some native libraries manually.
   * Put the file in the current working directory as `google-stt.json`
   * Put the file in your home directory as `google-stt.json`
 
+For the Google Cloud Text to Speech API, the configuration procedure is similar to the above mentioned. The difference is that the default credential name is `google-tts.json`. Of course, both APIs can be enabled under the same service account. In this case, both credentials refer to the same file.
+
 ## Usage
+
+The sample programs are located in the `scripts/` directory. Before executing the scripts don't forget to set the python path so that the `stt`, `tts`, and `utils` packages are available to the run-time.
 
 ### Command-line: `stt-cli.py`
 

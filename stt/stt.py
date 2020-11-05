@@ -3,7 +3,7 @@ import pyaudio
 from pynput.keyboard import Listener
 import sys
 from google.cloud import speech
-from gcp_utils import get_credentials
+from utils.gcp_utils import get_credentials
 
 CHUNK_SIZE = 1024
 RATE = 16000

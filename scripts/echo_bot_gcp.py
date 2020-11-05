@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-import stt
-import tts_gcp as tts
+from stt import stt
+from tts import tts_gcp as tts
 import time
 import argparse
 

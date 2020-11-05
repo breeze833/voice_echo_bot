@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-import stt
+from stt import stt
 import argparse
 
 if __name__=='__main__':

@@ -1,8 +1,8 @@
 # A Simple Voice Echo Bot
 
-This is a simple bot for demonstrating how to integrate speech-to-text and text-to-speech packages.
-It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation for synthesizing the voice, and plays the voice.
-In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used. 
+Here are a few sample scripts for demonstrating how to integrate speech-to-text and text-to-speech packages.
+It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation (or the Google Cloud Text to Speech) for synthesizing the voice, and plays the voice.
+In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used.
 
 ## Installation
 

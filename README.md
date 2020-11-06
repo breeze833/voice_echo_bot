@@ -10,7 +10,8 @@ In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, a
 * Make sure you have python3
 * `pip install -r < requirements.txt`
 
-Note: you may need to install some native libraries manually.
+Note 1: you may need to install some native libraries manually.
+Note 2: We use pygame 1.9.6 which depends on libSDL1.2. The project currently not support the latest pygame 2.0.0 which depends on libSDL2.
 
 ## Configuration
 

@@ -1,5 +1,5 @@
 gTTS
-pygame==1.9.6
+pygame
 google-cloud-speech
 pyaudio
 pynput

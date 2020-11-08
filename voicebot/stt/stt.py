@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 import pyaudio
-from pynput.keyboard import Listener
-import sys
+import threading
 from google.cloud import speech
 from voicebot.utils.gcp_utils import get_credentials
 
@@ -30,37 +29,37 @@ def _init_stt_context():
 
 init, stop, get_recording_stream = _init_stt_context()
 
-def _wait_anykey():
-    def any_keypress(key):
-        return False
-    with Listener(on_press=any_keypress, suppress=True) as listener:
-        listener.join()
+def is_enter_pressed(msg):
+    v = None
+    t = None
+    def _is_enter_pressed():
+        nonlocal v
+        nonlocal t
+        if t: 
+            t.start()
+            t = None
+        return v!=None
+    def _myinput():
+        nonlocal v
+        v = input(msg)
+    t = threading.Thread(target=_myinput)
+    return _is_enter_pressed
 
-def _get_anykey_detector():
-    is_detected = False
-    def on_any_keypress(key):
-        nonlocal is_detected
-        is_detected = True
-        return False
-    def start_listener():
-        listener = Listener(on_press=on_any_keypress, suppress=True)
-        listener.start()
-    def anykey_detected():
-        nonlocal is_detected
-        return is_detected
-    start_listener()
-    return anykey_detected
+def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...')):
+    """
+    The function to get the recorded voice.
 
-def record_voice():
-    print('Ready to record your voice, any key to start...', end='')
-    sys.stdout.flush()
-    _wait_anykey()
-    print('\nStart recording, any key to stop...', end='')
-    sys.stdout.flush()
-    anykey_detected = _get_anykey_detector()
+    Arguments:
+    start_recording -- the non-blocking function that returns True if the recorder can be started.
+    stop_recording -- the non-blocking function that returns True if the recorder should be stopped.
+    """
+    print('\nReady to start recording...', end='')
+    while not start_recording():
+        pass
+    print('\nRecording started')
     stream = get_recording_stream()
     frames = []
-    while not anykey_detected():
+    while not stop_recording():
         data = stream.read(CHUNK_SIZE)
         frames.append(data)
     stream.stop_stream()

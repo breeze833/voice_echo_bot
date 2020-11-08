@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-from stt import stt
-from tts import tts
+from voicebot.stt import stt
+from voicebot.tts import tts
 import time
 import argparse
 

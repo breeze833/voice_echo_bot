@@ -1,14 +1,15 @@
 # -*- encoding: utf-8 -*-
 from google.cloud import texttospeech
 from io import BytesIO
-import pygame
-from utils.gcp_utils import get_credentials
+from pydub import AudioSegment
+from pydub.playback import play
+from voicebot.utils.gcp_utils import get_credentials
 
 def init():
-    pygame.mixer.init()
+    pass
 
 def stop():
-    pygame.mixer.quit()
+    pass
 
 def say(text, lang='zh-tw'):
     if text==None or text.strip()=='': return
@@ -29,10 +30,8 @@ def say(text, lang='zh-tw'):
         voice_mp3.write(response.audio_content)
         voice_mp3.seek(0)
         
-        pygame.mixer.music.load(voice_mp3)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():
-            pass
+        seg = AudioSegment.from_file(voice_mp3)
+        play(seg)
     except Exception as e:
         print(e)
 

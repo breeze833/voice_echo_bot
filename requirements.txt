@@ -1,6 +1,6 @@
 gTTS
-pygame
 google-cloud-speech
 pyaudio
+pydub
 pynput
 google-cloud-texttospeech

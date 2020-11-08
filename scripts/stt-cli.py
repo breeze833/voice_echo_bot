@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-from stt import stt
+from voicebot.stt import stt
 import argparse
 
 if __name__=='__main__':

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import argparse
-from tts import tts_gcp as tts
+from voicebot.tts import tts_gcp as tts
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Read the given text')

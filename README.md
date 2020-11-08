@@ -2,7 +2,7 @@
 
 Here are a few sample scripts for demonstrating how to integrate speech-to-text and text-to-speech packages.
 It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation (or the Google Cloud Text to Speech) for synthesizing the voice, and plays the voice.
-In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used.
+In this project, `PyAudio`, `pydub`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used.
 
 ## Installation
 
@@ -11,7 +11,6 @@ In this project, `PyAudio`, `pygame`, `pynput`, `gTTS`, `google-cloud-speech`, a
 * `pip install -r < requirements.txt`
 
 Note 1: you may need to install some native libraries manually.
-Note 2: On some platforms, the pygame 2.0 binary distribution seems buggy in including an libSDL2 that does not loads the MP3 audio. If you encouter the problem, you may (1) manually install pygame and specify `--no-binary :all:` to force rebuilding the binary code; (2) use pygame 1.9.6 which depends on libSDL1.2.
 
 ## Configuration
 

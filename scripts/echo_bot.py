@@ -16,13 +16,12 @@ if __name__=='__main__':
 
     is_echoing = True
     while is_echoing:
-        voice_data = stt.record_voice()
+        voice_data = stt.record_voice(start_recording=stt.is_enter_pressed('Press <Enter to start...>'), stop_recording=stt.is_enter_pressed('Press <Enter> to stop...'))
         text = stt.google_stt(voice_data, lang=args.lang)
         print('Transcript {}'.format(text))
         time.sleep(2)
         tts.say(text, lang=args.lang)
-        if text in quit_terms:
-            is_echoing = False
+        is_echoing = text not in quit_terms
 
     stt.stop()
     tts.stop()

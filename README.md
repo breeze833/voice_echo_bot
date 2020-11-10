@@ -10,7 +10,8 @@ In this project, `PyAudio`, `pydub`, `pynput`, `gTTS`, `google-cloud-speech`, an
 * Make sure you have python3
 * `pip install -r < requirements.txt`
 
-Note 1: you may need to install some native libraries manually.
+Note 1: You may need to install some native libraries manually.
+Note 2: On Raspberry Pi, sometimes assertion failure would occur. It is caused by a bug in the PortAudio. Without fixing the library, installing pulseaudio or jackd is a workaround.
 
 ## Configuration
 

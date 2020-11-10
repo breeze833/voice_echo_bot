@@ -30,19 +30,22 @@ def _init_stt_context():
 init, stop, get_recording_stream = _init_stt_context()
 
 def is_enter_pressed(msg):
-    v = None
     t = None
+    def _myinput():
+        input(msg)
     def _is_enter_pressed():
-        nonlocal v
         nonlocal t
         if t: 
+            if t.is_alive():
+                return False
+            else:
+                t = None
+                return True
+        else:
+            t = threading.Thread(target=_myinput)
             t.start()
-            t = None
-        return v!=None
-    def _myinput():
-        nonlocal v
-        v = input(msg)
-    t = threading.Thread(target=_myinput)
+            return False
+
     return _is_enter_pressed
 
 def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...')):

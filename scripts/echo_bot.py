@@ -16,7 +16,7 @@ if __name__=='__main__':
 
     is_echoing = True
     while is_echoing:
-        voice_data = stt.record_voice(start_recording=stt.is_enter_pressed('Press <Enter to start...>'), stop_recording=stt.is_enter_pressed('Press <Enter> to stop...'))
+        voice_data = stt.record_voice()
         text = stt.google_stt(voice_data, lang=args.lang)
         print('Transcript {}'.format(text))
         time.sleep(2)

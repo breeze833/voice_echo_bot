@@ -48,18 +48,25 @@ def is_enter_pressed(msg):
 
     return _is_enter_pressed
 
-def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...')):
+def recording_message(is_recording):
+    if is_recording:
+        print('\nRecording started')
+    else:
+        print('\nRecording stopped')
+
+def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...'), recording_prompt=recording_message):
     """
     The function to get the recorded voice.
 
     Arguments:
     start_recording -- the non-blocking function that returns True if the recorder can be started.
     stop_recording -- the non-blocking function that returns True if the recorder should be stopped.
+    recording_prompt -- The function to show prompt message/indicator when recording (True) or when not recording (False)
     """
     print('\nReady to start recording...', end='')
     while not start_recording():
         pass
-    print('\nRecording started')
+    recording_prompt(True)
     stream = get_recording_stream()
     frames = []
     while not stop_recording():
@@ -67,7 +74,7 @@ def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), 
         frames.append(data)
     stream.stop_stream()
     stream.close()
-    print('\nRecording stopped.')
+    recording_prompt(False)
 
     return b''.join(frames)
 

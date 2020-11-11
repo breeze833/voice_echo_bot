@@ -54,18 +54,25 @@ def recording_message(is_recording):
     else:
         print('\nRecording stopped')
 
-def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...'), recording_prompt=recording_message):
+def ready_message(is_prompting):
+    if is_prompting:
+        print('\nReady to start recording...', end='')
+
+
+def record_voice(start_recording=is_enter_pressed('Press <Enter> to start...'), stop_recording=is_enter_pressed('Press <Enter> to stop...'), ready_prompt=ready_message, recording_prompt=recording_message):
     """
     The function to get the recorded voice.
 
     Arguments:
     start_recording -- the non-blocking function that returns True if the recorder can be started.
     stop_recording -- the non-blocking function that returns True if the recorder should be stopped.
+    ready_prompt -- the function that prints the message when it is ready to record voice (when True)
     recording_prompt -- The function to show prompt message/indicator when recording (True) or when not recording (False)
     """
-    print('\nReady to start recording...', end='')
+    ready_prompt(True)
     while not start_recording():
         pass
+    ready_prompt(False)
     recording_prompt(True)
     stream = get_recording_stream()
     frames = []

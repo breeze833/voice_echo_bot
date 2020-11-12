@@ -50,5 +50,5 @@ To use the API, you need the credentials file. The default name is `google-tts.j
 
 ## Raspberry Pi Specific Demonstration
 
-There are scripts that works on my Raspberry Pi based configuration. They are located in the `respeaker/` folder.
+There are scripts that works on my Raspberry Pi based configuration. They are located in the [`respeaker/`](respeaker/) folder.
 

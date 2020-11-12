@@ -28,6 +28,6 @@ For the Google Cloud Text to Speech API, the configuration procedure is similar 
 
 ## Usage
 
-The sample programs are located in the `scripts/` directory. Please refer to the README file in the directoryi to learn how to use them.
+The sample programs are located in the [`scripts/`](scripts/) directory. Please refer to the README file in the directoryi to learn how to use them.
 
 

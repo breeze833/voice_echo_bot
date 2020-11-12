@@ -1,10 +1,10 @@
 # A Simple Voice Echo Bot
 
-Here are a few sample scripts for demonstrating how to integrate speech-to-text and text-to-speech packages.
+Here are a few sample scripts and modules for demonstrating how to integrate speech-to-text and text-to-speech packages.
 It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation (or the Google Cloud Text to Speech) for synthesizing the voice, and plays the voice.
 In this project, `PyAudio`, `pydub`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used.
 
-We use the `pyttsx3` to synthesize the speech locally. The backend depends on the platform. For example, it is eSpeak on Linux.
+In addition to the cloud-based TTS, we also use the `pyttsx3` to synthesize the speech locally. The backend depends on the platform. For example, it is eSpeak on Linux.
 
 ## Installation
 
@@ -28,51 +28,6 @@ For the Google Cloud Text to Speech API, the configuration procedure is similar 
 
 ## Usage
 
-The sample programs are located in the `scripts/` directory. Before executing the scripts don't forget to set the python path so that the `stt`, `tts`, and `utils` packages are available to the run-time.
+The sample programs are located in the `scripts/` directory. Please refer to the README file in the directoryi to learn how to use them.
 
-### Command-line: `stt-cli.py`
-
-```
-usage: stt-cli.py [-h] [-l LANG]
-
-Record voice and recognize
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -l LANG, --lang LANG  The language of the voice
-
-```
-
-### Command-line: `tts-cli.py`
-
-```
-usage: tts-cli.py [-h] [-t TEXT] [-l LANG]
-
-Read the given text
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -t TEXT, --text TEXT  The text to be read
-  -l LANG, --lang LANG  The language of the text
-
-```
-
-### Command-line: `echo_bot.py`
-
-```
-usage: echo_bot.py [-h] [-l LANG]
-
-Echo what you said
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -l LANG, --lang LANG  The language you use
-
-```
-
-## Using the Cloud Text-to-Speech API
-
-The TTS based on the Google Cloud Platform API is implemented in `stt_gcp.py`.
-The corresponding comman-line programs are `tts_gcp.py` and `echo_bot_gcp.py`.
-To use the API, you need the credentials file. The default name is `google-tts.json`.
 

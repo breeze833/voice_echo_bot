@@ -4,6 +4,8 @@ Here are a few sample scripts for demonstrating how to integrate speech-to-text 
 It records your voice, uses the Google Cloud Speech to obtain the text, sends the text to the Google Translation (or the Google Cloud Text to Speech) for synthesizing the voice, and plays the voice.
 In this project, `PyAudio`, `pydub`, `pynput`, `gTTS`, `google-cloud-speech`, and `google-cloud-texttospeech` are used.
 
+We use the `pyttsx3` to synthesize the speech locally. The backend depends on the platform. For example, it is eSpeak on Linux.
+
 ## Installation
 
 * Download the project
